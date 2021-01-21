@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.net.*; // for InetAddress
 import java.util.Arrays;
 import java.util.Scanner;
@@ -22,8 +21,9 @@ public class InetAddressExample {
                 InetAddress address = InetAddress.getByName(res);
                 System.out.println("\t" + address.getHostName());
                 System.out.println("\t" + address.getHostAddress());
-                System.out.println("\t" + Arrays.toString(address.getHostAddress().getBytes()));
-
+                String binary[] = addressConversion(address.getHostAddress());
+                System.out.println("\t" + binary[0]);
+                System.out.println("\t" + binary[1]);
             } catch (UnknownHostException e) {
                 System.out.println("Unable to find address for " + res);
             }
@@ -44,4 +44,64 @@ public class InetAddressExample {
             }
         }
     }
+
+    /**
+     * This code could be more optimized but I dont care enough to do that.
+     * @param address string interpretation of IP address.
+     * @return array of length 2 which contains the binary dotted-quad and binary formats.
+     */
+    public static String[] addressConversion(String address) {
+        String res[] = new String[6];
+        String parts[] = address.split("\\.");
+        for (int i = 0; i < parts.length; i++) {
+            int p = Integer.parseInt(parts[i]);
+            String s = "";
+            if (p >= 128) {
+                    p -= 128;
+                    s += "1";
+            }  else {
+                    s += "0";
+            } if (p >= 64) {
+                    p -= 64;
+                    s += "1";
+            }  else {
+                    s += "0";
+            } if (p >= 32) {
+                    p -= 32;
+                    s += "1";
+            }  else {
+                    s += "0";
+            } if (p >= 16) {
+                    p -= 16;
+                    s += "1";
+            }  else {
+                    s += "0";
+            } if (p >= 8) {
+                    p -= 8;
+                    s += "1";
+            }  else {
+                    s += "0";
+            } if (p >= 4) {
+                    p -= 4;
+                    s += "1";
+            } else {
+                    s += "0";
+            } if (p >= 2) {
+                    p -= 2;
+                    s += "1";
+            }  else {
+                    s += "0";
+            } if (p >= 1) {
+                    p -= 1;
+                    s += "1";
+            }  else {
+                    s += "0";
+            }
+            parts[i] = s;
+        }
+        res[0] = parts[0] + "." + parts[1] + "." + parts[2] + "." + parts[3];
+        res[1] = parts[0] + parts[1] + parts[2] + parts[3];
+        return res;
+    }
 }
+
