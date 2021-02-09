@@ -1,5 +1,6 @@
 import java.net.*;  // for DatagramSocket, DatagramPacket, and InetAddress
 import java.io.*;   // for IOException
+import java.util.Arrays;
 
 public class UDPEchoServer {
 
@@ -13,14 +14,31 @@ public class UDPEchoServer {
         int servPort = Integer.parseInt(args[0]);
 
         DatagramSocket socket = new DatagramSocket(servPort);
-        DatagramPacket packet = new DatagramPacket(new byte[ECHOMAX], ECHOMAX);
+        DatagramPacket inPacket = new DatagramPacket(new byte[ECHOMAX], ECHOMAX);
+        DatagramPacket outPacket = new DatagramPacket(new byte[ECHOMAX], ECHOMAX);
+        boolean cond;
+        int i = 0;
 
         for (;;) {  // Run forever, receiving and echoing datagrams
-            socket.receive(packet);     // Receive packet from client
+            socket.receive(inPacket);     // Receive packet from client
             System.out.println("Handling client at " +
-                    packet.getAddress().getHostAddress() + " on port " + packet.getPort());
-            socket.send(packet);       // Send the same packet back to client
-            packet.setLength(ECHOMAX); // Reset length to avoid shrinking buffer
+                    inPacket.getAddress().getHostAddress() + " on port " + inPacket.getPort());
+            byte[] buf = inPacket.getData();
+            byte[] devowelized = new byte[ECHOMAX];
+            for (byte c : buf) {
+                cond = (char) c == 'a' || (char) c == 'e' || (char) c == 'i' || (char) c == 'o' || (char) c == 'u';
+                if (!cond) {
+                    devowelized[i] = c;
+                    i++;
+                }
+            }
+            i = 0;
+            outPacket.setData(devowelized, 0, ECHOMAX);
+            outPacket.setAddress(inPacket.getAddress());
+            outPacket.setPort(inPacket.getPort());
+            socket.send(outPacket);       // Send the same packet back to client
+            inPacket.setLength(ECHOMAX); // Reset length to avoid shrinking buffer
+            outPacket.setLength(ECHOMAX);
         }
         /* NOT REACHED */
     }
