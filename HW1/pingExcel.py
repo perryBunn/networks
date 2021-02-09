@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 def process_file(file_location):
     headers = {
         'server': [],
@@ -50,5 +51,5 @@ def process_file(file_location):
 
 
 if __name__ == '__main__':
-    file='G:/My Drive/_School/2021/COMP 4320/H1-pingres.txt'
+    file = 'G:/My Drive/_School/2021/COMP 4320/H1-pingres.txt'
     process_file(file)
