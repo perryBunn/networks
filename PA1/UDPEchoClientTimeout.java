@@ -17,6 +17,13 @@ public class UDPEchoClientTimeout {
 
         int servPort = (args.length == 3) ? Integer.parseInt(args[2]) : 7;
 
+        double totalTime = 0;
+        double tripTime = 0;
+        double maxTripTime = 0;
+        double minTripTime = 100;
+        long totalTimeLong = 0;
+
+
         DatagramSocket socket = new DatagramSocket();
 
         socket.setSoTimeout(TIMEOUT);  // Maximum receive blocking time (milliseconds)
