@@ -28,12 +28,14 @@ public class TCPEchoServer {
 
             InputStream in = clntSock.getInputStream();
             OutputStream out = clntSock.getOutputStream();
-            boolean cond;
+            boolean lowerCond;
+            boolean upperCond;
             // Receive until client closes connection, indicated by -1 return
             while ((recvMsgSize = in.read(byteBuffer)) != -1) {
                 for (byte l : byteBuffer) {
-                    cond = (char) l == 'a' || (char) l == 'e' || (char) l == 'i' || (char) l == 'o' || (char) l == 'u';
-                    if (!cond) {
+                    lowerCond = (char) l == 'a' || (char) l == 'e' || (char) l == 'i' || (char) l == 'o' || (char) l == 'u';
+                    upperCond = (char) l == 'A' || (char) l == 'E' || (char) l == 'I' || (char) l == 'O' || (char) l == 'U';
+                    if (!lowerCond && !upperCond) {
                         devowelized[i] = l;
                         i++;
                     }

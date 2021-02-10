@@ -8,10 +8,9 @@ An amalgamation of project files for Eli and Perry for Intro to Computer Network
 - [Disclaimer](DISCLAIMER.md)
 
 # In Progress
-- Programming Assignment 1 (Due: 2/9)
+- HW5 (Due: 2/11)
 
 # To Do
-- HW5 (Due: 2/11)
 - HW6 (Due: 2/18)
 - HW7 (Due: 2/25)
 - HW8 (Due: 3/4)

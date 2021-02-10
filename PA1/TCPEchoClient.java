@@ -29,7 +29,6 @@ public class TCPEchoClient {
             InputStream in = socket.getInputStream();
             OutputStream out = socket.getOutputStream();
 
-            // TODO: start time
             double startTime = System.nanoTime();
             out.write(byteBuffer);  // Send the encoded string to the server
 
@@ -43,7 +42,6 @@ public class TCPEchoClient {
                 totalBytesRcvd += bytesRcvd;
             }
 
-            // TODO: end time
             double endTime = System.nanoTime();
             System.out.println("Received: " + new String(byteBuffer) + " " + endTime);
             totalTimeLong += endTime-startTime;

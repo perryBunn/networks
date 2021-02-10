@@ -37,10 +37,10 @@ public class UDPEchoClientTimeout {
 
             int tries = 0;      // Packets may be lost, so we have to keep trying
             boolean receivedResponse = false;
+            double endTime = 0;
+            double startTime = 0;
             do {
                 socket.send(sendPacket);          // Send the echo string
-                double endTime = 0;
-                double startTime = 0;
                 try {
                     startTime = System.nanoTime();
                     socket.receive(receivePacket);  // Attempt echo reply reception
@@ -66,7 +66,7 @@ public class UDPEchoClientTimeout {
             } while ((!receivedResponse) && (tries < MAXTRIES));
 
             if (receivedResponse)
-                System.out.println("Received: " + new String(receivePacket.getData()));
+                System.out.println("Received: " + new String(receivePacket.getData()) + " " + endTime);
             else
                 System.out.println("No response -- giving up.");
         }

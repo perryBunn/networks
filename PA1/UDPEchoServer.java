@@ -16,7 +16,8 @@ public class UDPEchoServer {
         DatagramSocket socket = new DatagramSocket(servPort);
         DatagramPacket inPacket = new DatagramPacket(new byte[ECHOMAX], ECHOMAX);
         DatagramPacket outPacket = new DatagramPacket(new byte[ECHOMAX], ECHOMAX);
-        boolean cond;
+        boolean lowerCond;
+        boolean upperCond;
         int i = 0;
 
         for (;;) {  // Run forever, receiving and echoing datagrams
@@ -26,8 +27,9 @@ public class UDPEchoServer {
             byte[] buf = inPacket.getData();
             byte[] devowelized = new byte[ECHOMAX];
             for (byte c : buf) {
-                cond = (char) c == 'a' || (char) c == 'e' || (char) c == 'i' || (char) c == 'o' || (char) c == 'u';
-                if (!cond) {
+                lowerCond = (char) c == 'a' || (char) c == 'e' || (char) c == 'i' || (char) c == 'o' || (char) c == 'u';
+                upperCond = (char) c == 'A' || (char) c == 'E' || (char) c == 'I' || (char) c == 'O' || (char) c == 'U';
+                if (!lowerCond && !upperCond) {
                     devowelized[i] = c;
                     i++;
                 }
