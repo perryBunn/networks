@@ -11,9 +11,6 @@ An amalgamation of project files for Eli and Perry for Intro to Computer Network
 - HW6 (Due: 2/18)
 
 # To Do
-- HW7 (Due: 2/25)
-- HW8 (Due: 3/4)
-- HW9 (Due: 3/11)
 - Programming Assignment 2 (Due: 3/16)
 - HW10 (Due: 3/18) Quiz
 - HW12 (Due: 4/1)
