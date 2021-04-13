@@ -2,7 +2,7 @@ package request;
 
 public class Request {
 
-    public byte len = 9;             // TML
+    public byte len = 9;        // TML
     public short ID;            // Item identification number
     public int X;               // X
     public int A0;              // A_0

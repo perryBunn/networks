@@ -8,6 +8,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ServerTCP {
   private static int polynomial(int x, int a3, int a2, int a1, int a0) {
@@ -48,6 +49,7 @@ public class ServerTCP {
       throw new IllegalArgumentException("Parameter(s): <Port>");
 
     int port = Integer.parseInt(args[0]);   // Receiving Port
+
     while (true) {
       byte err = 0;
       ServerSocket servSock = new ServerSocket(port);
@@ -57,7 +59,7 @@ public class ServerTCP {
       RequestDecoderBin decoder = new RequestDecoderBin();
       Request receivedRequest = decoder.decode(clntSock.getInputStream());
 
-      System.out.println("Received Binary-Encoded Friend");
+      System.out.println("Received Binary-Encoded Request");
       System.out.println(receivedRequest + " ID:" + receivedRequest.ID);
 
       int res = polynomial(receivedRequest.X, receivedRequest.A3, receivedRequest.A2,
